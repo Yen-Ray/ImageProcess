@@ -1,18 +1,18 @@
 import java.io.File;
-import java.io.IOException;
 import java.util.Arrays;
 import java.util.Random;
 
 import javax.imageio.ImageIO;
 
 public class Img_startprocess extends Img_handler {
-
-	public Img_startprocess(String img_name) {
+	private String outputName;
+	
+	public Img_startprocess(String img_name) throws Img_NotFound {
 		super(img_name);
 		System.out.println("Img_startprocess_執行處理");
 	}
 	
-	public void imgprocess() throws IOException {
+	public void imgprocess() throws Exception {
 	    img2Gray();
 		img2neg();
 		for(int i=1;i<=3;i++)
@@ -22,9 +22,15 @@ public class Img_startprocess extends Img_handler {
 		imagebinary();		
 		imagelaplacian();
 		imgmaxfilter();
+		
 	}
 	
-	private void img2Gray() throws IOException {
+	private void im_goutput(String name) throws Exception{
+		ImageIO.write(bufferedImage, "jpg", new File(name));
+		System.out.println(name+"完成");
+	}
+	
+	private void img2Gray() throws Exception {
 
 		for(int x=0 ; x<image_h ; x++) {
 			
@@ -45,11 +51,13 @@ public class Img_startprocess extends Img_handler {
 			}
 			
 		}
-		System.out.println("img2Gray完成");
-		ImageIO.write(bufferedImage, "jpg", new File(img_path+"/"+name+"_gray.jpg"));
+		//System.out.println("img2Gray完成");
+		outputName=img_path+"\\"+name+"_gray.jpg";
+		im_goutput(outputName);
+		//ImageIO.write(bufferedImage, "jpg", new File());
 	}
 	
-	private void img2neg() throws IOException {
+	private void img2neg() throws Exception {
 		for(int x=0 ; x<image_h ; x++) {
 			
 			for(int y=0 ; y<image_w ; y++) {
@@ -67,12 +75,14 @@ public class Img_startprocess extends Img_handler {
 			}
 			
 		}
-		System.out.println("img2Negative完成");
-		ImageIO.write(bufferedImage, "jpg", new File(img_path+"/"+name+"_negative.jpg"));
+		//System.out.println("img2Negative完成");
+		//ImageIO.write(bufferedImage, "jpg", new File(img_path+"/"+name+"_negative.jpg"));
+		outputName=img_path+"\\"+name+"_negative.jpg";
+		im_goutput(outputName);
 		
 	}
 	
-	private void imgContrast(int gam) throws IOException {
+	private void imgContrast(int gam) throws Exception {
 		
 		double gamma=gam;
 		
@@ -120,11 +130,13 @@ public class Img_startprocess extends Img_handler {
 			}
 			
 		}
-		System.out.println("img2Contrast"+gamma+"完成");
-		ImageIO.write(bufferedImage, "jpg", new File(img_path+"/"+name+"_contrast"+gamma+".jpg"));
+		//System.out.println("img2Contrast"+gamma+"完成");
+		//ImageIO.write(bufferedImage, "jpg", new File(img_path+"/"+name+"_contrast"+gamma+".jpg"));
+		outputName=img_path+"\\"+name+"_contrast"+gamma+".jpg";
+		im_goutput(outputName);
 	}
 	
-	private void imagpepper() throws IOException {
+	private void imagpepper() throws Exception {
 		
 		bufferedImage = ImageIO.read(new File(img_path+"/"+name+"_contrast0.5.jpg"));
 		
@@ -155,11 +167,13 @@ public class Img_startprocess extends Img_handler {
 			}
 			
 		}
-		System.out.println("imgpepper完成");
-		ImageIO.write(bufferedImage, "jpg", new File(img_path+"/"+name+"_pepper.jpg"));
+		//System.out.println("imgpepper完成");
+		//ImageIO.write(bufferedImage, "jpg", new File(img_path+"/"+name+"_pepper.jpg"));
+		outputName=img_path+"\\"+name+"_pepper.jpg";
+		im_goutput(outputName);
 	}
 	
-	private void imgmedianfilter() throws IOException {
+	private void imgmedianfilter() throws Exception {
 		
 		bufferedImage = ImageIO.read(new File(img_path +"/"+name+"_pepper.jpg"));
 		
@@ -193,11 +207,13 @@ public class Img_startprocess extends Img_handler {
 			}
 			
 		}
-		System.out.println("imgmedianfilter完成");
-		ImageIO.write(bufferedImage, "jpg", new File(img_path+"/"+name+"_medianfilter.jpg"));
+		//System.out.println("imgmedianfilter完成");
+		//ImageIO.write(bufferedImage, "jpg", new File(img_path+"/"+name+"_medianfilter.jpg"));
+		outputName=img_path+"\\"+name+"_medianfilter.jpg";
+		im_goutput(outputName);
 	}
 	
-	private void imagebinary() throws IOException {
+	private void imagebinary() throws Exception {
 		
 		bufferedImage = ImageIO.read(new File(img_path +"/"+name+"_contrast2.0.jpg"));
 		
@@ -241,11 +257,13 @@ public class Img_startprocess extends Img_handler {
 			}
 			
 		}
-		System.out.println("imagebinary完成");
-		ImageIO.write(bufferedImage, "jpg", new File(img_path+"/"+name+"_binary.jpg"));
+		//System.out.println("imagebinary完成");
+		//ImageIO.write(bufferedImage, "jpg", new File(img_path+"/"+name+"_binary.jpg"));
+		outputName=img_path+"\\"+name+"_binary.jpg";
+		im_goutput(outputName);
 	}
 	
-	private void imagelaplacian() throws IOException {
+	private void imagelaplacian() throws Exception {
 		bufferedImage = ImageIO.read(new File(img_path +"/"+name+"_contrast1.0.jpg"));
 		
 		
@@ -287,11 +305,13 @@ public class Img_startprocess extends Img_handler {
 				
 			}
 		}
-		System.out.println("imagelaplacian完成");
-		ImageIO.write(bufferedImage, "jpg", new File(img_path+"/"+name+"_laplacian.jpg"));
+		//System.out.println("imagelaplacian完成");
+		//ImageIO.write(bufferedImage, "jpg", new File(img_path+"/"+name+"_laplacian.jpg"));
+		outputName=img_path+"\\"+name+"_laplacian.jpg";
+		im_goutput(outputName);
 	}
 	
-	private void imgmaxfilter() throws IOException {
+	private void imgmaxfilter() throws Exception {
 		
 		bufferedImage = ImageIO.read(new File(img_path +"/"+name+"_laplacian.jpg"));
 		
@@ -334,8 +354,10 @@ public class Img_startprocess extends Img_handler {
 				
 			}
 		}	
-		System.out.println("imgmaxfilter完成");
-		ImageIO.write(bufferedImage, "jpg", new File(img_path+"/"+name+"_maxfilter.jpg"));
+		//System.out.println("imgmaxfilter完成");
+		//ImageIO.write(bufferedImage, "jpg", new File(img_path+"/"+name+"_maxfilter.jpg"));
+		outputName=img_path+"\\"+name+"_maxfilter.jpg";
+		im_goutput(outputName);
 	}
 
 }
