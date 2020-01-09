@@ -1,5 +1,5 @@
 # ImgProcess
-![1](https://github.com/Yen-Ray/ImageProcess/raw/master/IMAG.jpg "原始圖片")
+<img src="https://github.com/Yen-Ray/ImageProcess/raw/master/IMAG.jpg" width = "400" height = "300" alt="" align=center />
 
 >轉灰階
 ![2](https://github.com/Yen-Ray/ImageProcess/raw/master/IMAG_gray.jpg )
