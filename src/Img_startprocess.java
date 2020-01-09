@@ -22,7 +22,7 @@ public class Img_startprocess extends Img_handler {
 		imagebinary();		
 		imagelaplacian();
 		imgmaxfilter();
-		
+		super.end();
 	}
 	
 	private void im_goutput(String name) throws Exception{
@@ -229,11 +229,11 @@ public class Img_startprocess extends Img_handler {
 			}
 			
 		}
-		avgpixel=avgpixel/(image_h*image_h);
+		avgpixel=avgpixel/(image_h*image_w);
 		
 		for(int x=0 ; x<image_h ; x++) {
 			
-			for(int y=0 ; y<image_h ; y++) {
+			for(int y=0 ; y<image_w ; y++) {
 				
 				int pixel = bufferedImage.getRGB(y, x);
 				 
@@ -268,7 +268,7 @@ public class Img_startprocess extends Img_handler {
 		
 		
 		int filter[]=new int[5];
-		int output[][]=new int [image_h][image_w];
+		int output[][]=new int [image_w][image_h];
 		
 		//這樣可以直接處理陣列爆掉的問題
 		for(int x=1 ; x<image_h-1 ; x++) {
@@ -317,7 +317,7 @@ public class Img_startprocess extends Img_handler {
 		
 	
 		int filter[]=new int[9];
-		int output[][]=new int [image_h][image_w];
+		int output[][]=new int [image_w][image_h];
 		//這樣可以直接處理陣列爆掉的問題
 		for(int x=1 ; x<image_h-1 ; x++) {
 			

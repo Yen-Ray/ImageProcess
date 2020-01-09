@@ -16,6 +16,6 @@ class Img_Attribute {
 	
 	public void show() {
 		System.out.println("路徑："+img_path);
-		System.out.println("圖片尺寸："+image_h+"x"+image_w);
+		System.out.println("圖片尺寸(W x H)："+image_w+"x"+image_h);
 	}
 }

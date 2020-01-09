@@ -34,6 +34,11 @@ public class Img_handler extends Img_Attribute {
 		}
 	}
 	
+	public String end() {
+		System.out.println("Finish");
+		return "Finish";
+	}
+	
 	public int get_Check_ImgFile() {
 		return check;
 	}
